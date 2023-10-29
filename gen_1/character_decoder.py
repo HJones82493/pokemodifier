@@ -7,7 +7,7 @@ class CharacterDecoder:
 
 	def decode_byte(self, encoded_byte: int) -> str:
 		if encoded_byte not in range(0x00, 0x100):
-			raise IndexError("Invalid byte. Only values from 0x00 - 0xFF can be decoded")
+			raise IndexError(f"Invalid byte: {encoded_byte}.\nOnly values from 0x00 - 0xFF can be decoded")
 		return self._decoding_map[encoded_byte]
 
 	def decode_byte_array(self, encoded_bytes: List[int]) -> str:
@@ -112,12 +112,12 @@ class CharacterDecoder:
 
 		#0xF0 is the Pokedollar sign. $ is substituted to not lose meaning
 		self._decoding_map[0xF0] = "$"
-		self._decoding_map[0xF0] = ""
-		self._decoding_map[0xF0] = "."
-		self._decoding_map[0xF0] = "/"
-		self._decoding_map[0xF0] = ","
+		self._decoding_map[0xF1] = ""
+		self._decoding_map[0xF2] = "."
+		self._decoding_map[0xF3] = "/"
+		self._decoding_map[0xF4] = ","
 		# 0xF0 is the female symbol
-		self._decoding_map[0xF0] = "(F)"
+		self._decoding_map[0xF5] = "(F)"
 
 		#Finally, the numbers
 		number = "0"
