@@ -1,5 +1,5 @@
 class CharacterEncoder:
-	self._encoding_map = dict()
+	_encoding_map = dict()
 
 	def __init__(self):
 		self._setup_encoding_map()
