@@ -7,6 +7,11 @@ class ItemInfo:
 			raise ValueError("Invalid Item Index")
 		return list(self._item_map.keys())[list(self._item_map.values()).index(index)] 
 
+	def get_item_index(self, item_name: str) -> int:
+		if item_name not in self._item_map:
+			raise ValueError("Invalid Item Name")
+		return self._item_map.get(item_name)
+
 	def _setup_item_map(self):
 		self._item_map = {
 			"Master Ball":0x01,
