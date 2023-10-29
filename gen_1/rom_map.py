@@ -3,7 +3,7 @@ from items import ItemInfo
 class RomMap:
 	SHOP_START_VALUE = 0xFE
 	SHOP_END_VALUE = 0xFF
-	self._addresses = dict()
+	_addresses = dict()
 	def __init__(self):
 		self._setup_rom_map()
 
