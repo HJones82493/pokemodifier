@@ -115,17 +115,56 @@ class RomReader:
 
 class RomWriter:
     """Class used to write data from the app to a ROM file"""
-    def __init__(self, file_path: str = None, overwrite: bool = False):
+    def __init__(
+            self,
+            rom_data: bytes,
+            file_path: str,
+            overwrite: bool = False
+    ):
         """Initialize the ROM writer
 
         Can specify an existing file. If overwrite is false and an already existing path is
         provided, will raise an exception.
 
         Args:
-             file_path - Full path to write the ROM file to
-             overwrite - Variable to determine whether to overwrite existing file
+            rom_data - The data to write for the rom as a byte string
+            file_path - Full path to write the ROM file to
+            overwrite - Variable to determine whether to overwrite existing file
+        """
+        self._data = rom_data
+        self._save_path = file_path
+        self._overwrite = overwrite
+
+    def write(self):
+        """Method to save the rom data to the specified file
 
         Raises:
-            IOError - If the file already exists and overwrite is False
+            IOError - If the file already exists and overwrite is false
         """
-        pass
+        if os.path.exists(self._save_path):
+            if not self._overwrite:
+                raise IOError("File already exists, cannot write")
+        with open(self._save_path, "wb") as fw:
+            fw.write(self._data)
+
+    def select_new_file(self, file_path: str):
+        """Method to change the save location of the writer
+
+        Args:
+            file_path - The location to save the ROM data at
+
+        Raises:
+            IOError - If the new path already exists and overwrite is set to false
+        """
+        if os.path.exists(file_path):
+            if not self._overwrite:
+                raise IOError("File already exists")
+        self._save_path = file_path
+
+    def set_overwrite(self, overwrite: bool):
+        """Method to set or unset overwrite
+
+        Args:
+            overwrite - Whether to overwrite existing files
+        """
+        self._overwrite = overwrite
