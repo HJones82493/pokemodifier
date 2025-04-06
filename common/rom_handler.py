@@ -14,7 +14,7 @@ Typical usage examples:
 """
 import os
 
-from common.exceptions import OverwriteException
+from common.exceptions import OverwriteError
 
 class RomReader:
     """Class used to read from a ROM file and import the bytes data"""
@@ -82,7 +82,7 @@ class RomReader:
 
         if self._data:
             if not overwrite_existing:
-                raise OverwriteException("Cannot read file, data already exists")
+                raise OverwriteError("Cannot read file, data already exists")
         self._file_pointer.seek(0)
         self._data = self._file_pointer.read()
 
