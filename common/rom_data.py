@@ -9,10 +9,15 @@ from common.exceptions import InvalidAddressError
 
 class RomData:
     """The superclass for ROM data"""
-    def __init__(self):
-        """Initializes the ROM Data class"""
-        self._raw_data: bytes = b""
-        self._address_map: dict = {}
+    def __init__(self, raw_data: bytes, address_map: dict):
+        """Initializes the ROM Data class
+
+        Args:
+            raw_data - The raw data in a binary format
+            address_map - The address map to use for the rom
+        """
+        self._raw_data: bytes = raw_data
+        self._address_map: dict = address_map
 
     def get_byte(self, address: int) -> int:
         """Method to get the value at a given address in the data
