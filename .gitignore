@@ -1,3 +1,6 @@
 .venv/
 .idea/
 blue.gb
+
+**/pycache/**
+*.pyc
