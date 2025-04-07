@@ -1,16 +1,27 @@
 import os
+import random
+import string
 import unittest
 
 from common.rom_data import RomData
 from common.exceptions import InvalidAddressError
 
+BASE_DIR = os.path.join(os.path.dirname(__file__), "..", "..")
+
 class TestRomData(unittest.TestCase):
     def setUp(self):
-        self.rom_path = os.path.join(os.environ.get("BASE_DIR"), "blue.gb")
+        self.rom_path = os.path.join(BASE_DIR, "blue.gb")
+        with open(self.rom_path, "wb") as fw:
+            for i in range(0x1000):
+                fw.write(random.choice(string.printable).encode())
         with open(self.rom_path, "rb") as fp:
             self.data = fp.read()
 
         self.rd = RomData(self.data, {})
+
+    def tearDown(self):
+        if os.path.exists(self.rom_path):
+            os.remove(self.rom_path)
 
     def test_get_byte_success(self):
         addr = 0x0146
