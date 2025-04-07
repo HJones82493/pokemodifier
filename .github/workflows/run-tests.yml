@@ -1,7 +1,7 @@
 name: Run Unit Tests
 on: [push]
 jobs:
-  Setup and Run Tests:
+  Setup-and-Run-Tests:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout Repo
