@@ -17,10 +17,11 @@ class TestItem(unittest.TestCase):
         self.assertRaises(IndexError, self.item.change_name, "Some data that's way too long")
 
     def test_item_name_padding_success(self):
-        expected_value = 11
+        expected_value = 2
         self.item.change_name("Some Data")
 
-        self.assertEqual(expected_value, len(self.item.name))
+
+        self.assertEqual(expected_value, self.item.padding)
 
     def test_item_change_price_success(self):
         expected_value = [0, 2, 0]
