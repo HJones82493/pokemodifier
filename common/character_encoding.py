@@ -102,6 +102,7 @@ class CharacterEncoder:
         for k, v in self._map.items():
             if v == enc_char:
                 return k
+        return -1
 
     def encode_string(self, string: str) -> List[int]:
         """Method to encode an entire string
